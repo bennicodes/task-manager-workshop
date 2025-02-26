@@ -1,0 +1,40 @@
+.delete-modal {
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.delete-modal__container {
+  min-width: 360px;
+  width: 40%;
+  border-radius: var(--border-radius-small);
+  padding: var(--spacing-medium);
+  background-color: lightblue;
+}
+.delete-modal__text {
+  text-align: center;
+  padding: var(--spacing-small);
+}
+.delete-modal__buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-large);
+  padding: var(--spacing-small);
+}
+.delete-modal__confirm-button,
+.delete-modal__cancel-button {
+  min-width: 80px;
+  min-height: 32px;
+  border: 2px solid var(--color-background-dark);
+  border-radius: var(--border-radius-small);
+}
+
+.delete-modal--display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

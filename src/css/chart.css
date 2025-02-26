@@ -1,0 +1,65 @@
+/* Modal container */
+.chart-modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal content */
+.chart-modal__content {
+  min-width: 380px;
+  width: 60%;
+  height: auto;
+  padding: var(--spacing-x-large);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-large);
+  background-color: var(--background-medium);
+  border-radius: var(--border-radius-medium);
+}
+
+/* Chart title */
+.chart-modal__title {
+  text-align: center;
+}
+
+/* Chart canvas */
+.chart-modal__canvas {
+  display: block;
+  width: 90%;
+  height: 50%;
+  min-height: 380px;
+  margin: 0 auto;
+  padding: var(--spacing-large) var(--spacingsmall);
+}
+
+/* Close button */
+.chart-modal__close {
+  display: block;
+  width: 50%;
+  min-width: 380px;
+  height: 48px;
+  border-radius: var(--border-radius-small);
+  margin: 0 auto;
+  background-color: transparent;
+  border: 4px solid var(--background-dark);
+  color: var(--background-dark);
+  font-size: var(--font-size-base);
+}
+
+.chart-modal--display {
+  display: flex;
+}
+
+.chart-modal__close:hover {
+  box-shadow: 0 0 10px var(--background-dark);
+  transition: box-shadow 0.3s ease-in-out;
+}

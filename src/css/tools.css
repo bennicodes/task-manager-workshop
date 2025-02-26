@@ -1,0 +1,48 @@
+/* Styles for tools component */
+.tools {
+  width: 100%;
+  padding: var(--spacing-x-large) var(--spacing-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-x-large);
+  background-color: var(--background-light);
+}
+.tools__group {
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-x-small);
+}
+.tools__button {
+  /* font-size: var(--font-size-2x-large); */
+  font-size: 6rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+.tools__button--add i,
+.tools__button--chart i {
+  font-size: var(--font-size-2x-large);
+  color: var(--font-dark);
+  transition: transform 0.5s ease-in-out;
+}
+
+.tools__button--add i:hover,
+.tools__button--chart i:hover {
+  transform: scale(105%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.tools__filter-label {
+  font-family: ProzaLibre-Bold;
+}
+.tools__filter-month {
+  min-width: 150px;
+  min-height: 32px;
+  border-radius: var(--border-radius-small);
+}

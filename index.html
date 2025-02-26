@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.css"
+    />
+
+    <link rel="stylesheet" href="./src/css/reset.css" />
+    <link rel="stylesheet" href="./src/css/fonts.css" />
+    <link rel="stylesheet" href="./src/css/variables.css" />
+    <link rel="stylesheet" href="./src/css/styles.css" />
+    <link rel="stylesheet" href="./src/css/tools.css" />
+    <link rel="stylesheet" href="./src/css/form.css" />
+    <link rel="stylesheet" href="./src/css/deleteModal.css" />
+    <link rel="stylesheet" href="./src/css/spinner.css" />
+    <link rel="stylesheet" href="./src/css/chart.css" />
+
+    <title>Task Manager App</title>
+  </head>
+  <body>
+    <!-- Header structure -->
+    <header class="header">
+      <h1 class="header__title">Task Manager Application</h1>
+    </header>
+    <main>
+      <!-- Tools structure -->
+      <div class="tools">
+        <div class="tools__group">
+          <button
+            class="tools__button tools__button--add"
+            aria-label="Add Task"
+            id="add-task"
+          >
+            <i class="fa-regular fa-square-plus tools__icon"></i>
+          </button>
+          <label for="add-task" class="tools__add-label">Add task</label>
+        </div>
+        <div class="tools__group">
+          <button
+            class="tools__button tools__button--chart"
+            aria-label="View Charts"
+            id="view-chart"
+          >
+            <i class="fa-solid fa-chart-pie tools__icon"></i>
+          </button>
+          <label for="view-chart" class="tools__chart-label">View charts</label>
+        </div>
+        <div class="">
+          <label for="month-select" class="tools__filter-label"
+            >Filter by Month:</label
+          >
+          <select id="month-select" class="tools__filter-month">
+            <option value="all">All</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+      </div>
+      <!-- Display tasks structure -->
+      <div class="tasks">
+        <table class="tasks__table">
+          <thead class="table__header">
+            <tr class="table__header-row">
+              <th class="table__header-number">N</th>
+              <th class="table__header-title">Title</th>
+              <th class="table__header-date">Due Date</th>
+              <th class="table__header-time">Due time</th>
+              <th class="table__header-category">Category</th>
+              <th class="table__header-priority">Priority</th>
+              <th class="table__header-tools">Tools</th>
+            </tr>
+          </thead>
+          <tbody class="table__body"></tbody>
+        </table>
+      </div>
+    </main>
+    <!-- Tasks form structure -->
+    <div class="form-modal">
+      <form class="form">
+        <span class="form__logo"
+          ><i class="fa-solid fa-file-signature"></i
+        ></span>
+
+        <div class="form__group">
+          <label for="title">Task title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Enter task's title. Max 50 chars"
+            maxlength="50"
+            class="form__title-input"
+          />
+          <p class="form__title-error form__error-message">Title error</p>
+        </div>
+        <div class="form__group">
+          <label for="date">Due date</label>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            placeholder="Select task's due date."
+            class="form__date-input"
+            min="2025-01-20"
+          />
+          <p class="form__date-error form__error-message">Date error</p>
+        </div>
+        <div class="form__group">
+          <label for="time">Due time</label>
+          <input
+            type="time"
+            name="time"
+            id="time"
+            placeholder="Select task's due time (optional)."
+            class="form__time-input"
+          />
+          <p class="form__time-error form__error-message">Time error</p>
+        </div>
+        <div class="form__group">
+          <label for="category">Task category</label>
+          <select name="category" id="category" class="form__category-select">
+            <option value="">Select task's cetgory</option>
+            <option value="work">Work</option>
+            <option value="home">Home</option>
+            <option value="personal">Personal</option>
+            <option value="study">Study</option>
+          </select>
+          <p class="form__category-error form__error-message">Category error</p>
+        </div>
+        <div class="form__group">
+          <label for="priority">Task priority</label>
+          <select name="priority" id="priority" class="form__priority-select">
+            <option value="">Select task's priority</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="optional">Optional</option>
+          </select>
+          <p class="form__priority-error form__error-message">Priority error</p>
+        </div>
+        <p class="form__submission-feedback"></p>
+        <div class="form__group-button">
+          <button class="form__submit-button">Add task</button>
+          <button class="form__close-button">Close</button>
+        </div>
+      </form>
+    </div>
+    <!-- Delete modal structure -->
+    <div class="delete-modal">
+      <div class="delete-modal__container">
+        <p class="delete-modal__text"></p>
+        <div class="delete-modal__buttons">
+          <button class="delete-modal__confirm-button">Confirm</button>
+          <button class="delete-modal__cancel-button">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <!-- Spinner structure -->
+    <div class="spinner" id="spinner">
+      <div class="spinner__circle"></div>
+    </div>
+    <!-- Chart Modal structure -->
+    <div class="chart-modal" id="chart-modal">
+      <div class="chart-modal__content">
+        <h2 class="chart-modal__title">Task Distribution by Category</h2>
+        <canvas id="chartCanvas" class="chart-modal__canvas"></canvas>
+        <button class="chart-modal__close" id="chart-modal-close">Close</button>
+      </div>
+    </div>
+
+    <script type="module" src="./src/js/app.js"></script>
+  </body>
+</html>
