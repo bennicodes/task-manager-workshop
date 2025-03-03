@@ -1,13 +1,12 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { database } from "./firebaseConfig";
-
+import { openDeleteModal } from "./modal";
+import toggleCompletion from "./toggleCompletion";
 const renderTasks = async (tasks = "all") => {
   const tableBody = document.querySelector(".table__body");
   tableBody.innerHTML = "";
-
   let renderCollection;
-
-  if (tasks === "all") {
+  if ((tasks = "all")) {
     const taskCollection = collection(database, "tasks");
     const q = query(taskCollection, orderBy("createdAt"));
     const tasksSnapshot = await getDocs(q);
@@ -15,13 +14,9 @@ const renderTasks = async (tasks = "all") => {
   } else {
     renderCollection = tasks;
   }
-
-  // Render tasks in the table
   renderCollection.forEach((doc, index) => {
     const task = doc.data();
-    console.log(task);
-
-    // Creating elements
+    // creating elemts
     const tableRow = document.createElement("tr");
     const taskNumber = document.createElement("td");
     const taskTitle = document.createElement("td");
@@ -30,12 +25,10 @@ const renderTasks = async (tasks = "all") => {
     const taskCategory = document.createElement("td");
     const taskPriority = document.createElement("td");
     const taskTools = document.createElement("td");
-
     const crossTaskButton = document.createElement("button");
     const deleteTaskButton = document.createElement("button");
     const editTaskButton = document.createElement("button");
-
-    // Append elements
+    // append elements
     tableBody.append(tableRow);
     tableRow.append(
       taskNumber,
@@ -47,20 +40,17 @@ const renderTasks = async (tasks = "all") => {
       taskTools
     );
     taskTools.append(crossTaskButton, deleteTaskButton, editTaskButton);
-
-    // Populate elements with task details
+    // populate the elements with task's details
     taskNumber.textContent = index + 1;
     taskTitle.textContent = task.title;
     taskDate.textContent = task.date;
-    taskTime.textContent = task.time ? task.time : "➖";
+    taskTime.textContent = task.time ? task.time : "－";
     taskCategory.textContent = task.category;
     taskPriority.textContent = task.priority;
     crossTaskButton.innerHTML = "<i class='fa-solid fa-check'></i>";
-    deleteTaskButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
-    editTaskButton.innerHTML = "<i class='fa-solid fa-pen-to-square'></i>";
-
-    // Add class names
-    task.isCompleted && tableRow.classList.add("task--completed");
+    deleteTaskButton.innerHTML = "<i class='fa-solid fa-trash'></i>";
+    editTaskButton.innerHTML = "<i class='fa-solid fa-edit'></i>";
+    // add classnames
     tableRow.classList.add("table__body-row");
     taskNumber.classList.add("table__body-number");
     taskTitle.classList.add("table__body-title");
@@ -72,7 +62,13 @@ const renderTasks = async (tasks = "all") => {
     crossTaskButton.classList.add("tools__button");
     deleteTaskButton.classList.add("tools__button");
     editTaskButton.classList.add("tools__button");
+    // add event listeners
+    crossTaskButton.addEventListener("click", () => {
+      toggleCompletion(doc.id, tableRow);
+    });
+    deleteTaskButton.addEventListener("click", () => {
+      openDeleteModal(doc.id, task.title);
+    });
   });
 };
-
 export default renderTasks;
