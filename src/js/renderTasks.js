@@ -1,7 +1,9 @@
+// Import
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { database } from "./firebaseConfig";
 import { openDeleteModal } from "./modal";
 import toggleCompletion from "./toggleCompletion";
+
 const renderTasks = async (tasks = "all") => {
   const tableBody = document.querySelector(".table__body");
   tableBody.innerHTML = "";
@@ -14,9 +16,22 @@ const renderTasks = async (tasks = "all") => {
   } else {
     renderCollection = tasks;
   }
+
+  if (renderCollection.length === 0) {
+    const emptyCollectionRow = document.createElement("tr");
+    const emptyCollectionCell = document.createElement("td");
+    emptyCollectionCell.textContent = "No tasks found";
+    tableBody.classList.add("table__body--empty");
+    tableBody.append(emptyCollectionRow);
+    emptyCollectionRow.append(emptyCollectionCell);
+    return;
+  } else {
+    tableBody.classList.remove("table__body--empty");
+  }
+
   renderCollection.forEach((doc, index) => {
     const task = doc.data();
-    // creating elemts
+    // creating elements
     const tableRow = document.createElement("tr");
     const taskNumber = document.createElement("td");
     const taskTitle = document.createElement("td");
