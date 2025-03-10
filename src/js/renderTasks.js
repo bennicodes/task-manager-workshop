@@ -1,7 +1,8 @@
 // Import
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { populateEditForm } from "./editTasks";
 import { database } from "./firebaseConfig";
-import { openDeleteModal } from "./modal";
+import { openDeleteModal, openEditModal } from "./modal";
 import toggleCompletion from "./toggleCompletion";
 
 const renderTasks = async (tasks = "all") => {
@@ -66,6 +67,7 @@ const renderTasks = async (tasks = "all") => {
     deleteTaskButton.innerHTML = "<i class='fa-solid fa-trash'></i>";
     editTaskButton.innerHTML = "<i class='fa-solid fa-edit'></i>";
     // add classnames
+    task.isCompleted && tableRow.classList.add("task--completed");
     tableRow.classList.add("table__body-row");
     taskNumber.classList.add("table__body-number");
     taskTitle.classList.add("table__body-title");
@@ -83,6 +85,10 @@ const renderTasks = async (tasks = "all") => {
     });
     deleteTaskButton.addEventListener("click", () => {
       openDeleteModal(doc.id, task.title);
+    });
+    editTaskButton.addEventListener("click", () => {
+      openEditModal();
+      populateEditForm(doc.id);
     });
   });
 };

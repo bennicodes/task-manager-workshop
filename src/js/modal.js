@@ -12,6 +12,7 @@ const confirmDeleteButton = document.querySelector(
 const previousConfirmDeleteModalButton = document.querySelector(
   ".delete-modal__confirm-button"
 );
+const formModal = document.querySelector(".form-modal");
 
 let previousConfirmDeleteModalHandler = null;
 
@@ -53,4 +54,14 @@ const closeDeleteModal = () => {
   });
 };
 
-export { closeDeleteModal, closeModal, openDeleteModal, openModal };
+const openEditModal = () => {
+  formModal.classList.add("form-modal--display");
+};
+
+export {
+  closeDeleteModal,
+  closeModal,
+  openDeleteModal,
+  openEditModal,
+  openModal,
+};
